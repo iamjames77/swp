@@ -58,6 +58,11 @@ def handle_client(conn, addr):
                 host_conn.send(f"{user_id[addr]}".encode())
             else:
                 conn.send("JOIN_FAILED, SESSION DOESN`T EXIST".encode())
+        elif command == "SERVER_CLOSED":
+            session_id = int(params[0])
+            if session_id in session:
+                username, title, host, port, host_conn = session[session_id]
+                del session[session_id] 
 
 
     conn.close()
